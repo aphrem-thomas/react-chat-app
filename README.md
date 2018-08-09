@@ -1,2 +1,2 @@
 # react-chat-app
-chat app using react and socket.io
+chat app using react, expressjs and socket.io
