@@ -4,20 +4,27 @@ import './App.css';
 import SocketClient from 'socket.io-client';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    var socket;
+  }
   componentDidMount(){
     console.log("trying to connect");
-     var socket=SocketClient.connect("http://localhost:3333/");
+    this.socket=SocketClient.connect("http://localhost:3333/");
+  }
+  chatSubmit(e){
+    e.preventDefault();
+    console.log("inside chatsubmit");
+    let message=document.getElementById("textinput").value;
+    this.socket.emit("chat",message);
   }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <form>
+          <input type="text" id="textinput"/>
+          <button onClick={this.chatSubmit.bind(this)}>submit</button>
+        </form>
       </div>
     );
   }

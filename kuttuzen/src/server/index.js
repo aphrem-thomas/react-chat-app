@@ -12,9 +12,12 @@ if(ENVIRONMENT=='production'){
 }
 
 io.on('connection',(socket)=>{
-    console.log("user connected");
+    console.log("user "+socket.id+" connected");
     socket.on('disconnect',()=>{
         console.log("user diconnected");
+    })
+    socket.on('chat',(message)=>{
+        console.log(message);
     })
 })
 
